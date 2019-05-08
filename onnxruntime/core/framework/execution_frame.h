@@ -130,6 +130,7 @@ class ExecutionFrame final : public IExecutionFrame {
                                                 const TensorShape& shape,
                                                 bool create_fence = false);
 
+  // thread-safe
   Status GeneratePatterns(MemoryPatternGroup* out) const;
 
   bool HasMemoryPatternPlanner() const {

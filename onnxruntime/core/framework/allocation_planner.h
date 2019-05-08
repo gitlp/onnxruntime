@@ -28,7 +28,7 @@ class ISequentialPlannerContext {
 class SequentialPlannerContext : public ISequentialPlannerContext {
  public:
   SequentialPlannerContext()
-      : m_enable_parallel_execution(false) {
+       {
   }
 
   SequentialPlannerContext(bool p_enable_parallel_execution)
@@ -44,7 +44,7 @@ class SequentialPlannerContext : public ISequentialPlannerContext {
   }
 
  private:
-  bool m_enable_parallel_execution;
+  bool m_enable_parallel_execution{false};
 };
 
 class SequentialPlanner {

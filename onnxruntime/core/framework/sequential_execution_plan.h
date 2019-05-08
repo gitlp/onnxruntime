@@ -35,9 +35,17 @@ struct AllocPlanPerValue {
   AllocPlanPerValue() : location(CPU, OrtArenaAllocator) {}
 };
 
+class MLValueLocator {
+ public:
+  virtual const OrtAllocatorInfo& GetLocation(size_t mlvalue_index) const = 0;
+  // return all memory locations for all the MLValues
+  virtual std::set<OrtAllocatorInfo> GetAllLocations() const = 0;
+  virtual ~MLValueLocator() = default;
+};
+
 // SequentialExecutionPlan: This is the data that is produced by a static
 // planner for a sequential execution, to be used by a SequentialExecutor.
-struct SequentialExecutionPlan {
+struct SequentialExecutionPlan : public MLValueLocator {
   // Allocation plan:
   // ExecutionFrame::GetOrCreateTensor() should use the following information
   // to decide whether to allocate a new buffer or reuse an existing buffer
@@ -67,6 +75,18 @@ struct SequentialExecutionPlan {
 
   // to_be_freed: vector elements represent indices of ml-values to be freed (as described above)
   std::vector<MLValueIndex> to_be_freed;
+
+  const OrtAllocatorInfo& GetLocation(size_t mlvalue_index) const override {
+    return allocation_plan[mlvalue_index].location;
+  }
+
+  std::set<OrtAllocatorInfo> GetAllLocations() const override {
+    std::set<OrtAllocatorInfo> locations;
+    for (auto& alloc_plan : allocation_plan) {
+      if (locations.find(alloc_plan.location) == locations.end()) locations.insert(alloc_plan.location);
+    }
+    return locations;
+  }
 };
 
 // Output details of an execution plan:

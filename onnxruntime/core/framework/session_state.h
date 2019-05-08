@@ -180,7 +180,7 @@ class SessionState {
   const FuncManager& GetFuncMgr() const { return fused_funcs_mgr_; }
   FuncManager& GetMutableFuncMgr() { return fused_funcs_mgr_; }
 
-  std::map<OrtAllocatorInfo, BufferUniquePtr>& GetMutableWeightsBuffers() { return weights_buffers_; }
+  std::vector<BufferUniquePtr>& GetMutableWeightsBuffers() { return weights_buffers_; }
 
   void CalculateNodeIndexInfo();
   const NodeIndexInfo& GetNodeIndexInfo() const;
@@ -201,7 +201,7 @@ class SessionState {
   // This data structure is for unintializing string tensors and
   // munmap memory region and close file descriptor
   std::unordered_map<int, OrtCallback> deleter_for_initialized_tensors_;
-  std::map<OrtAllocatorInfo, BufferUniquePtr> weights_buffers_;
+  std::vector<BufferUniquePtr> weights_buffers_;
   std::unique_ptr<SequentialExecutionPlan> p_seq_exec_plan_ = nullptr;
 
   const logging::Logger* logger_ = nullptr;
