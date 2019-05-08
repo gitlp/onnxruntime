@@ -209,7 +209,7 @@ class PlannerImpl {
     }
 
     const std::vector<std::pair<int, int>>& alias_map = ci->kernel_def->Alias();
-    auto& input_args = node.InputDefs();
+    auto input_args = node.InputDefs();
     for (auto pair : alias_map) {
       if (pair.second == output_arg_num) {
         // we _must_ reuse this input to satisfy aliasing requirement: (e.g., for reshape)
@@ -393,7 +393,7 @@ class PlannerImpl {
       }
 
       auto& default_allocator_info = exec_provider->GetAllocator(0, OrtMemTypeDefault)->Info();
-      auto& outputs = pnode->OutputDefs();
+      auto outputs = pnode->OutputDefs();
       auto num_outputs = outputs.size();
 
       for (size_t i = 0; i < num_outputs; ++i) {

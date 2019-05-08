@@ -34,7 +34,7 @@ Status ParallelExecutor::Execute(const SessionState& session_state,
                                  const std::vector<MLValue>& feeds,
                                  const std::vector<int>& fetch_mlvalue_idxs,
                                  std::vector<MLValue>& fetches,
-                                 const std::unordered_map<size_t, CustomAllocator> fetch_allocators,
+                                 const std::unordered_map<size_t, CustomAllocator>& fetch_allocators,
                                  const logging::Logger& logger) {
   TimePoint tp;
   bool f_profiler_enabled = session_state.Profiler().FEnabled();

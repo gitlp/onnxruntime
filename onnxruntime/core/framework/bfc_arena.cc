@@ -80,7 +80,7 @@ bool BFCArena::Extend(size_t rounded_bytes) {
     // Only backpedal once.
     started_backpedal_ = true;
 
-    static constexpr float kBackpedalFactor = 0.9f;
+    static constexpr float kBackpedalFactor = 0.9F;
 
     // Try allocating less memory.
     while (mem_addr == nullptr) {

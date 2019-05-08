@@ -26,8 +26,7 @@ inline bool MemTypeOnCpuExplicitly(OrtMemType mem_type) {
 
 class KernelDef {
  public:
-  explicit KernelDef() {
-  }
+  explicit KernelDef() = default;
 
   const std::string& OpName() const {
     return op_name_;

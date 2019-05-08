@@ -13,8 +13,8 @@ struct OrtStatus {
 };
 
 ORT_API(OrtStatus*, OrtCreateStatus, OrtErrorCode code, _In_ const char* msg) {
-  assert(!(code == 0 && msg != nullptr));
-  size_t clen = strlen(msg);
+  assert(code != 0);
+  size_t clen = msg == nullptr ? 0 : strlen(msg);
   OrtStatus* p = reinterpret_cast<OrtStatus*>(::malloc(sizeof(OrtStatus) + clen));
   if (p == nullptr) return nullptr;  // OOM
   p->code = code;

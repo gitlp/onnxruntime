@@ -2477,7 +2477,7 @@ Status Graph::InlineFunction(Node& node) {
   return Status::OK();
 }
 
-void Graph::SetInputs(const std::vector<const NodeArg*> inputs) {
+void Graph::SetInputs(const std::vector<const NodeArg*>& inputs) {
   if (GraphLoadedFromModelFile(graph_proto_)) {
     // TODO: add this support.
     ORT_THROW("This API is not supported when model is loaded from proto file right now.");
@@ -2487,7 +2487,7 @@ void Graph::SetInputs(const std::vector<const NodeArg*> inputs) {
   graph_inputs_manually_set_ = true;
 }
 
-void Graph::SetOutputs(const std::vector<const NodeArg*> outputs) {
+void Graph::SetOutputs(const std::vector<const NodeArg*>& outputs) {
   if (GraphLoadedFromModelFile(graph_proto_)) {
     // TODO: add this support.
     ORT_THROW("This API is not supported when model is loaded from proto file right now.");

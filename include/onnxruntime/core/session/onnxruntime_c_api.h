@@ -523,8 +523,7 @@ ORT_API_STATUS(OrtGetValueCount, const OrtValue* value, size_t* out);
    * sequence. 'in' should be an arrary of N OrtValues.
    * \value_type should be either map or sequence.
    */
-ORT_API_STATUS(OrtCreateValue, OrtValue** const in, int num_values, enum ONNXType value_type,
-               OrtValue** out);
+ORT_API_STATUS(OrtCreateValue, OrtValue** in, int num_values, enum ONNXType value_type, OrtValue** out);
 
 /*
  * EXPERIMENTAL APIS - Subject to change. Released as a preview to get feedback and enable early testing
